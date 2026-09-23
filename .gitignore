@@ -1,0 +1,22 @@
+# Python 缓存
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+
+# 中间结果与因子结果：体积大，可由代码重新生成
+**/中间结果/
+**/因子结果/
+*.parquet
+
+# 其他大文件与临时产物
+*.zip
+*.aux
+*.log
+*.out
+*.toc
+*.synctex.gz
+
+# 操作系统文件
+Thumbs.db
+.DS_Store
