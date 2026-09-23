@@ -17,6 +17,9 @@ __pycache__/
 *.toc
 *.synctex.gz
 
+# 工具箱是独立仓库，不纳入本项目
+**/factor-toolkit/
+
 # 操作系统文件
 Thumbs.db
 .DS_Store
