@@ -1,6 +1,6 @@
 # 四因子计算项目
 
-EP、PB、ROE、Size 四个股票横截面因子的计算代码与交付文档。数据区间
+EP、PB、ROE、Size、换手率等股票横截面因子的计算代码与交付文档。数据区间
 2020-01-02 至 2025-12-31，统一采用「T 日因子用于 T+1 日交易」的点时间口径。
 
 ## 〇、四个阶段
@@ -15,7 +15,7 @@ EP、PB、ROE、Size 四个股票横截面因子的计算代码与交付文档�
 | ③ 标准化 | 四个因子各做一遍 | 逐日横截面 MAD 去极值与 Z 标准化 | **标准化因子值（正式交付物）** |
 | ④ 因子测试 | factor-toolkit | 横截面回归、Rank IC、行业内分层回测 | 测试结果 |
 
-- 阶段 ①②③ 在本项目：EP 的部分在 `factor-ep` 子仓库，PB / ROE / Size 在本仓库
+- 阶段 ①②③ 在本项目：EP 的部分在 `factor-ep` 子仓库，PB / ROE / Size / 换手率在本仓库
 - 阶段 ④ 在 factor-toolkit，**不在本仓库**
 - **标准化属于因子计算层**（第 ③ 段）：标准化后的值就是正式交付物，所以由各因子
   自己完成，工具箱不重复实现——同一套去极值口径全项目只有一份代码
@@ -31,6 +31,7 @@ EP、PB、ROE、Size 四个股票横截面因子的计算代码与交付文档�
 ├── factor-pb/         PB
 ├── factor-roe/               ROE
 ├── factor-size/              Size
+├── factor-turnover/          换手率（行情衍生）
 │
 └── 财务报表披露与更新规律统计.md  财报披露时间规律的研究记录
 ```
@@ -45,7 +46,7 @@ git clone --recursive https://github.com/Tang2588/factor-pipeline.git
 git submodule update --init --recursive
 ```
 
-## 二、四个因子
+## 二、因子清单
 
 | 因子 | 公式 | 需要的数据 | 说明 |
 |---|---|---|---|
@@ -53,8 +54,9 @@ git submodule update --init --recursive
 | **PB** | 总市值 ÷ 归母股东权益 | 资产负债表 + 行情 | 负净资产保留为负 PB |
 | **ROE** | TTM 归母净利润 ÷ 平均归母权益 | 利润表 + 资产负债表 + 行情 | 平均权益取本期与去年同期均值 |
 | **Size** | ln(总市值) | 仅行情 | 越大表示市值越大 |
+| **换手率** | 过去 20 个交易日平均换手率 | 仅行情 | 行情衍生，非财务报表口径 |
 
-四个因子的正式结果都是同一格式：
+各因子的正式结果都是同一格式：
 
 ```text
 index   = ['date', 'stock_code']
@@ -198,6 +200,10 @@ python size_step1_复用EP行情.py
 python size_step2_计算对数市值.py
 python size_step3_MAD去极值_Z标准化.py
 python verify_size.py
+
+# 换手率（行情衍生，factor-turnover\代码 下）
+python turnover_step1_读取已清洗行情.py
+python turnover_step2_计算换手率并标准化.py
 ```
 
 顺序约束：EP 的 step1 必须先跑，它产出的行情面板是其余三个因子的输入；
@@ -258,3 +264,5 @@ pandas / numpy / pyarrow
 4. 只有因子计算，不含实际成交、涨跌停、成交量、滑点和交易成本的模拟；
 5. EP 的 `pure_factor_streaming.py` 与本仓库根目录下的是两份副本，逻辑一致但
    需要人工保持同步。EP 保留自己的一份是为了让它作为独立仓库能单独运行。
+6. 行情表的 `turnover` / `me_float` / `share_float` 在 2025-06-27 有 17 行
+   `-9999` 缺失哨兵；换手率因子已把负的换手率统一按缺失处理。
