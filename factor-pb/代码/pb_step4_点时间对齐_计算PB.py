@@ -36,7 +36,7 @@ def make_batch(merged: pd.DataFrame):
 
     raw = pd.DataFrame({"date": merged["date"], "stock_code": merged["code6"], "signal": pb})
     raw = raw.set_index(["date", "stock_code"])
-    mask = merged[["date", "code6", "suspended", "suspended_unknown", "is_cixin", "negative_book_equity"]].rename(columns={"code6": "stock_code"})
+    mask = merged[["date", "code6", "suspended", "suspended_unknown", "negative_book_equity"]].rename(columns={"code6": "stock_code"})
     mask = mask.set_index(["date", "stock_code"])
     mask["st_filter_applied"] = 0
     mask["st_filter_note"] = "historical ST/PT data unavailable"

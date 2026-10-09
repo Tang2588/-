@@ -34,7 +34,7 @@ def make_batch(merged: pd.DataFrame):
     signal.loc[merged["suspended"].eq(1)] = np.nan
     raw = pd.DataFrame({"date": merged["date"], "stock_code": merged["code6"], "signal": signal})
     raw = raw.set_index(["date", "stock_code"])
-    mask = merged[["date", "code6", "suspended", "suspended_unknown", "is_cixin", "VERSION_TIME", *EVENT_COLUMNS]].rename(columns={"code6": "stock_code"})
+    mask = merged[["date", "code6", "suspended", "suspended_unknown", "VERSION_TIME", *EVENT_COLUMNS]].rename(columns={"code6": "stock_code"})
     mask = mask.set_index(["date", "stock_code"])
     mask["st_filter_applied"] = 0
     mask["st_filter_note"] = "historical ST/PT data unavailable"
