@@ -203,13 +203,22 @@ PB 的 step2 与 step3 产出的权益版本被 ROE 的 step3 复用。
 *.parquet
 ```
 
-基础数据来自 `D:\实习生学习项目\基础数据\`：
+基础数据来自 `D:\实习生学习项目\基础数据\`。该目录下共 **6 个** parquet，
+其中 **4 个**是本流程需要的：
 
-| 文件 | 内容 |
+| 文件 | 大小 | 内容 | 谁在用 |
+|---|---:|---|---|
+| `chn_equ_mkt_quotation.parquet` | 651 MB | 行情：日期、代码、总市值、停牌状态 | EP step1 |
+| `vw_fdmt_is_new.parquet` | 77 MB | 利润表：归母净利润、报告期、公告时间 | EP step2、ROE step2 |
+| `vw_fdmt_bs_new.parquet` | 105 MB | 资产负债表：归母股东权益 | PB step2、ROE step3 |
+| `chn_equ_indus_sw.parquet` | 4.5 MB | 申万一级行业分类 | 测试工具箱（行业中性化与行业内分组） |
+
+另外两个不参与因子计算，缺失也不影响运行：
+
+| 文件 | 说明 |
 |---|---|
-| `chn_equ_mkt_quotation.parquet` | 行情 |
-| `vw_fdmt_is_new.parquet` | 利润表 |
-| `vw_fdmt_bs_new.parquet` | 资产负债表 |
+| `chn_equ_info_calendar.parquet` | 交易日历，代码里没有引用 |
+| `vw_fdmt_cf_new.parquet` | 现金流量表，只在两库数据对比中用过 |
 
 路径常量集中在 `factor_paths.py`，换机器只需改这一个文件。
 
