@@ -159,7 +159,6 @@ python step2_利润表处理.py
 python step3_TTM计算.py
 python step4_点时间对齐_计算PE.py
 python step5_MAD去极值_Z标准化.py
-python factor_verify.py
 
 # PB（在 市净率\PB因子_交付版\代码 下）
 python pb_step1_读取已清洗行情.py
@@ -187,6 +186,13 @@ python verify_size.py
 顺序约束：EP 的 step1 必须先跑，它产出的行情面板是其余三个因子的输入；
 PB 的 step2 与 step3 产出的权益版本被 ROE 的 step3 复用。
 
+完整的复现步骤——前置检查、每一步的预期输出、跑完之后的验收清单、常见卡点——
+见 [全流程说明.md](全流程说明.md)。
+
+关于 EP 的验收脚本：**EP 交付版的 `factor_verify.py` 已移除**。EP 交付版定位为
+纯因子生产仓库，因子正确性由 factor-toolkit 复现交付数字来验证。PB / ROE / Size
+的 `verify_*.py` 仍在各自目录下。
+
 ## 六、数据说明
 
 以下目录体积大且可由代码重新生成，不纳入版本管理：
@@ -213,6 +219,10 @@ PB 的 step2 与 step3 产出的权益版本被 ROE 的 step3 复用。
 Python 3.12
 pandas / numpy / pyarrow
 ```
+
+依赖版本见 [requirements.txt](requirements.txt)（与 EP 交付版、因子测试工具箱
+锁定的版本一致）。因子计算本身不需要 scipy / statsmodels / matplotlib——
+统计检验与绘图在 factor-toolkit 里做。
 
 ## 八、已知限制
 

@@ -1,0 +1,9 @@
+# 四因子计算项目的运行依赖（版本与 EP 交付版、因子测试工具箱保持一致）
+#
+# 四个因子的计算（行情清洗、财报版本处理、TTM、点时间对齐、MAD 去极值与 Z 标准化）
+# 只用到下面三个库，不需要 scipy / statsmodels / matplotlib
+# —— 绘图与统计检验在 factor-toolkit（因子测试工具箱）里做。
+
+numpy==2.4.6
+pandas==3.0.3
+pyarrow==24.0.0
