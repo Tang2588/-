@@ -22,6 +22,7 @@ EP_DIR = PROJECT_ROOT / "factor-ep"
 PB_DIR = PROJECT_ROOT / "factor-pb"
 ROE_DIR = PROJECT_ROOT / "factor-roe"
 SIZE_DIR = PROJECT_ROOT / "factor-size"
+TURNOVER_DIR = PROJECT_ROOT / "factor-turnover"
 
 # 基础数据源
 MARKET_SOURCE = BASE_DATA / "chn_equ_mkt_quotation.parquet"
