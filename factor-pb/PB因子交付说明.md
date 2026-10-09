@@ -2,7 +2,7 @@
 
 ## 1. 交付内容
 
-交付目录：D:\因子计算\市净率\PB因子_交付版
+交付目录：D:\因子计算\factor-pb
 
 正式因子文件为 因子结果\pb.parquet，格式为：
 
@@ -15,7 +15,7 @@ signal 是经过 MAD 去极值和横截面 Z 标准化后的 PB。
 
 已清洗行情表：
 
-    D:\因子计算\市盈率\EP因子_交付版\中间结果\_mkt_clean.parquet
+    D:\因子计算\factor-ep\中间结果\_mkt_clean.parquet
 
 资产负债表数据：
 

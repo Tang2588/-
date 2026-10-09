@@ -3,7 +3,7 @@
 
 放在 ``D:\\因子计算`` 下，所有步骤脚本从这里取路径，避免把目录写死在每个文件里。
 
-**股票池单一来源**：行情面板统一由 EP 的 ``step1_样本筛选.py`` 生成，
+**股票池单一来源**：行情面板统一由 EP 的 ``ep_step1_样本筛选.py`` 生成，
 其余三个因子通过 :func:`load_market_panel` 复制使用，并强制校验口径一致。
 """
 from __future__ import annotations
@@ -18,10 +18,10 @@ PROJECT_ROOT = Path(__file__).resolve().parent
 BASE_DATA = Path(r"D:\实习生学习项目\基础数据")
 
 # 四个交付目录
-EP_DIR = PROJECT_ROOT / "市盈率" / "EP因子_交付版"
-PB_DIR = PROJECT_ROOT / "市净率" / "PB因子_交付版"
-ROE_DIR = PROJECT_ROOT / "ROE因子_交付版"
-SIZE_DIR = PROJECT_ROOT / "规模因子_交付版"
+EP_DIR = PROJECT_ROOT / "factor-ep"
+PB_DIR = PROJECT_ROOT / "factor-pb"
+ROE_DIR = PROJECT_ROOT / "factor-roe"
+SIZE_DIR = PROJECT_ROOT / "factor-size"
 
 # 基础数据源
 MARKET_SOURCE = BASE_DATA / "chn_equ_mkt_quotation.parquet"

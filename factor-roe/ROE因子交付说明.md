@@ -2,7 +2,7 @@
 
 ## 1. 交付目录
 
-交付目录：D:\因子计算\ROE因子_交付版
+交付目录：D:\因子计算\factor-roe
 
 正式输出为：因子结果\roe.parquet。
 
@@ -15,8 +15,8 @@ signal 是经过 MAD 去极值和每日横截面 Z 标准化后的 ROE。
 
 ROE 不再重复从原始利润表清洗 N_INCOME_ATTR_P。EP 已经完成了合并报表筛选、版本处理和 TTM 计算，ROE 直接复用：
 
-    D:\因子计算\市盈率\EP因子_交付版\中间结果\reports.parquet
-    D:\因子计算\市盈率\EP因子_交付版\中间结果\reports_ttm.parquet
+    D:\因子计算\factor-ep\中间结果\reports.parquet
+    D:\因子计算\factor-ep\中间结果\reports_ttm.parquet
 
 ROE Step 2 只检查 EP 清洗结果的字段和唯一键，并将 EP 的利润版本和 TTM 文件复制到 ROE 中间结果目录，不重新读取和清洗原始利润表。
 

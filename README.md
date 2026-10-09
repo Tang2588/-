@@ -10,15 +10,15 @@ EP、PB、ROE、Size 四个股票横截面因子的计算代码与交付文档�
 ├── factor_paths.py              共用路径常量 + 行情面板加载与口径校验
 ├── pure_factor_streaming.py     共用流式计算助手（分块读写、点时对齐、MAD+Z）
 │
-├── 市盈率/EP因子_交付版/         EP（独立仓库，见下方说明）
-├── 市净率/PB因子_交付版/         PB
-├── ROE因子_交付版/               ROE
-├── 规模因子_交付版/              Size
+├── factor-ep/         EP（独立仓库，见下方说明）
+├── factor-pb/         PB
+├── factor-roe/               ROE
+├── factor-size/              Size
 │
 └── 财务报表披露与更新规律统计.md  财报披露时间规律的研究记录
 ```
 
-`市盈率/EP因子_交付版` 是一个 **git submodule**，指向
+`factor-ep` 是一个 **git submodule**，指向
 <https://github.com/Tang2588/factor-ep>。克隆本仓库时请使用：
 
 ```bash
@@ -64,7 +64,7 @@ columns = ['signal']
 ### 股票池的单一来源
 
 行情清洗（代码规范化、B 股排除、北交所新旧代码映射）只在 EP 的
-`step1_样本筛选.py` 中做一次。其余三个因子通过
+`ep_step1_样本筛选.py` 中做一次。其余三个因子通过
 `factor_paths.load_market_panel()` 复制使用，该函数会强制校验：
 
 1. 行情面板不含 B 股，否则报错；
@@ -153,14 +153,14 @@ sys.path.insert(0, str(PROJECT_ROOT))
 各因子脚本都在自己的 `代码/` 目录下，按编号顺序执行。
 
 ```powershell
-# EP（在 市盈率\EP因子_交付版\代码 下）
-python step1_样本筛选.py
-python step2_利润表处理.py
-python step3_TTM计算.py
-python step4_点时间对齐_计算PE.py
-python step5_MAD去极值_Z标准化.py
+# EP（在 factor-ep\代码 下）
+python ep_step1_样本筛选.py
+python ep_step2_利润表处理.py
+python ep_step3_TTM计算.py
+python ep_step4_点时间对齐_计算PE.py
+python ep_step5_MAD去极值_Z标准化.py
 
-# PB（在 市净率\PB因子_交付版\代码 下）
+# PB（在 factor-pb\代码 下）
 python pb_step1_读取已清洗行情.py
 python pb_step2_资产负债表处理.py
 python pb_step3_点时权益对齐.py
@@ -168,7 +168,7 @@ python pb_step4_点时间对齐_计算PB.py
 python pb_step5_MAD去极值_Z标准化.py
 python verify_pb.py
 
-# ROE（在 ROE因子_交付版\代码 下）
+# ROE（在 factor-roe\代码 下）
 python roe_step1_读取已清洗行情.py
 python roe_step2_利润表处理.py
 python roe_step3_TTM和平均权益.py
@@ -176,7 +176,7 @@ python roe_step4_点时间对齐_计算ROE.py
 python roe_step5_MAD去极值_Z标准化.py
 python verify_roe.py
 
-# Size（在 规模因子_交付版\代码 下）
+# Size（在 factor-size\代码 下）
 python size_step1_复用EP行情.py
 python size_step2_计算对数市值.py
 python size_step3_MAD去极值_Z标准化.py
