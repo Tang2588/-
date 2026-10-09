@@ -19,10 +19,10 @@ EP、PB、ROE、Size 四个股票横截面因子的计算代码与交付文档�
 ```
 
 `市盈率/EP因子_交付版` 是一个 **git submodule**，指向
-<https://github.com/Tang2588/factor-test>。克隆本仓库时请使用：
+<https://github.com/Tang2588/factor-ep>。克隆本仓库时请使用：
 
 ```bash
-git clone --recursive https://github.com/Tang2588/-.git
+git clone --recursive https://github.com/Tang2588/factor-pipeline.git
 
 # 已克隆但忘记加 --recursive
 git submodule update --init --recursive
